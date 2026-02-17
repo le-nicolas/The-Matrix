@@ -1,23 +1,44 @@
 # The-Matrix
-Matrices and Markov chains are highly compatible due to the natural way matrices can represent the transitions and states within Markov chains. 
 
-![Markov-chains-a-Markov-chain-for-L1-States-are-represented-by-circles-of-different](https://github.com/le-nicolas/The-Matrix/assets/112614851/7408b627-a0d6-43f6-9f04-f535def08407)
-![maxresdefault (2)](https://github.com/le-nicolas/The-Matrix/assets/112614851/49e246a9-728e-4f74-a2bd-f4f135c4a964)
+A small from-scratch Python project for learning matrix operations through a practical Markov chain simulator.
 
+## What is included
 
+- `the_matrix/matrix.py`: lightweight matrix class with multiplication, transpose, identity, and fast exponentiation.
+- `the_matrix/markov.py`: Markov chain model with transition validation, simulation, n-step transitions, and stationary distribution estimation.
+- `Markov.py`: runnable weather simulation example.
+- `tests/`: unit tests for matrix math and Markov behavior.
 
-A Markov chain is a stochastic process that describes a sequence of possible events, where the probability of each event depends only on the state attained in the previous event (memoryless property). 
+## Quick Start
 
+```bash
+python Markov.py
+```
 
-Heres the deal... Gubot kay siya lantawon. so mas maayo jd kung i apply ang Matrix :D
+Example output:
 
-![image](https://github.com/le-nicolas/The-Matrix/assets/112614851/86906894-2d95-4c30-b9c2-6d4f0ca15e59)
+```text
+Weather Markov Chain Simulation
+Step  0: [1.000, 0.000, 0.000]  likely=Sunny
+Step  1: [0.700, 0.200, 0.100]  likely=Sunny
+...
+```
 
+## Run Tests
 
+```bash
+python -m unittest discover -s tests -v
+```
 
-Chada kaayo siya!!!!
+## Why matrices for Markov chains?
 
+If `x_t` is the row-vector distribution at step `t`, and `P` is the transition matrix:
 
-Practical application:
-Consider a weather prediction model where the weather can be sunny, cloudy, or rainy.
+`x_(t+1) = x_t P`
+
+For multi-step transitions:
+
+`x_(t+n) = x_t P^n`
+
+This project keeps that relationship explicit in code.
 

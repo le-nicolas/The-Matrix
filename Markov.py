@@ -1,26 +1,32 @@
-import numpy as np
+from the_matrix import MarkovChain, Matrix, format_distribution
 
-# Define a transition matrix
-transition_matrix = np.array([[0.9, 0.1],
-                              [0.5, 0.5]])
 
-# Define an initial state vector
-initial_state = np.array([1, 0])  # Starting in state 0
+def main() -> None:
+    transitions = Matrix(
+        [
+            [0.70, 0.20, 0.10],  # Sunny -> (Sunny, Cloudy, Rainy)
+            [0.30, 0.40, 0.30],  # Cloudy -> (...)
+            [0.20, 0.50, 0.30],  # Rainy -> (...)
+        ]
+    )
+    states = ["Sunny", "Cloudy", "Rainy"]
+    chain = MarkovChain(transitions, states=states)
 
-# Number of steps to simulate
-steps = 10
+    initial_distribution = [1.0, 0.0, 0.0]
+    timeline = chain.simulate(initial_distribution, steps=12)
 
-# Function to simulate the Markov chain
-def markov_chain_simulation(P, x, steps):
-    state_distributions = [x]
-    for _ in range(steps):
-        x = np.dot(x, P)
-        state_distributions.append(x)
-    return state_distributions
+    print("Weather Markov Chain Simulation")
+    print("-" * 32)
+    for step, distribution in enumerate(timeline):
+        likely = chain.most_likely_state(distribution)
+        print(f"Step {step:>2}: [{format_distribution(distribution, digits=3)}]  likely={likely}")
 
-# Simulate the Markov chain
-state_distributions = markov_chain_simulation(transition_matrix, initial_state, steps)
+    stationary = chain.stationary_distribution()
+    print("\nEstimated stationary distribution")
+    print("-" * 32)
+    for state, probability in zip(chain.states, stationary):
+        print(f"{state:<7} {probability:.4f}")
 
-# Display the result
-for step, distribution in enumerate(state_distributions):
-    print(f"Step {step}: {distribution}")
+
+if __name__ == "__main__":
+    main()
