@@ -2,6 +2,10 @@
 
 A small from-scratch Python project for learning matrix operations through a practical Markov chain simulator.
 
+## Preview
+
+![Sample output preview](assets/weather_markov_result.svg)
+
 ## What is included
 
 - `the_matrix/matrix.py`: lightweight matrix class with multiplication, transpose, identity, and fast exponentiation.
